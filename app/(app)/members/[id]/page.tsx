@@ -39,7 +39,7 @@ export default async function MemberDetailPage({ params, searchParams }: { param
     <div className="space-y-5">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <Tip label="Quay lại"><Link href="/" aria-label="Quay lại" className="btn-icon"><ArrowLeft size={18} /></Link></Tip>
+          <Tip label="Quay lại"><Link href="/members" aria-label="Quay lại" className="btn-icon"><ArrowLeft size={18} /></Link></Tip>
           <Avatar name={member.username} size="lg" />
           <h1 className="font-semibold">{member.username}</h1>
         </div>

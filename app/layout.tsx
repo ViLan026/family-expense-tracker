@@ -1,18 +1,12 @@
-import type { Metadata, Viewport } from "next";
-import "@fontsource-variable/inter";
-import "./globals.css";
+import { requireSession } from "@/lib/session";
+import { Sidebar } from "@/components/Sidebar";
 
-export const metadata: Metadata = {
-  title: "Chi tiêu gia đình",
-  description: "Ghi lại và theo dõi các khoản chi trong gia đình",
-};
-
-export const viewport: Viewport = { themeColor: "#710014" };
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function AppLayout({ children }: { children: React.ReactNode }) {
+  const session = await requireSession();
   return (
-    <html lang="vi">
-      <body>{children}</body>
-    </html>
+    <div className="min-h-screen">
+      <Sidebar username={session.username} />
+      <main className="mx-auto w-full max-w-6xl px-4 pb-24 pt-6 md:pb-10 md:pl-64 md:pr-8">{children}</main>
+    </div>
   );
 }
