@@ -23,7 +23,7 @@ cp .env.example .env.local
 Không có đăng ký công khai, tài khoản tạo bằng lệnh (mật khẩu được hash bằng bcrypt). Chạy lại với cùng username sẽ đặt lại mật khẩu:
 
 ```bash
-npm run seed -- lan:lanlan bo:matkhau me:123456
+npm run seed -- me:123456
 ```
 
 ## 4. Chạy local
