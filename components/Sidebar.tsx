@@ -65,7 +65,7 @@ export function Sidebar({ username }: { username: string }) {
                 </div>
             </aside>
 
-            <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-3 gap-1 border-t border-line bg-surface px-2 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] md:hidden">
+            <nav className="fixed inset-x-4 bottom-0 z-30 grid grid-cols-3 gap-1 rounded-t-xl border border-line bg-surface px-2 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] md:hidden">
                 {NAV.map(({ href, label, icon: Icon }) => (
                     <Link
                         key={href}
