@@ -11,4 +11,16 @@ export type Transaction = {
   users: { username: string } | null;
 };
 
+export type MonthlyBudget = {
+  id: string;
+  user_id: string;
+  year: number;
+  month: number;
+  amount: number;
+  created_at: string;
+  updated_at: string;
+};
+
 export type ActionState = { error?: string; ok?: boolean };
+
+

@@ -1,6 +1,6 @@
 import "server-only";
 import { db } from "@/lib/db";
-import type { Member, Transaction } from "@/lib/types";
+import type { Member, MonthlyBudget, Transaction } from "@/lib/types";
 
 const SELECT = "id, user_id, title, description, amount, transaction_date, created_at, users(username)";
 
@@ -58,4 +58,45 @@ export async function getTransaction(id: string): Promise<Transaction | null> {
   if (!/^[0-9a-f-]{36}$/i.test(id)) return null;
   const { data } = await db().from("transactions").select(SELECT).eq("id", id).maybeSingle();
   return (data as unknown as Transaction) ?? null;
+}
+
+
+
+/**
+ * Lấy ngân sách của tất cả thành viên trong một tháng.
+ */
+export async function getMonthlyBudgets(
+  year: number,
+  month: number,
+): Promise<MonthlyBudget[]> {
+  const { data, error } = await db()
+    .from("monthly_budgets")
+    .select("id, user_id, year, month, amount, created_at, updated_at")
+    .eq("year", year)
+    .eq("month", month);
+
+  if (error) throw new Error(error.message);
+
+  return (data ?? []) as MonthlyBudget[];
+}
+
+/**
+ * Lấy ngân sách của một thành viên trong một tháng.
+ */
+export async function getMonthlyBudget(
+  userId: string,
+  year: number,
+  month: number,
+): Promise<MonthlyBudget | null> {
+  const { data, error } = await db()
+    .from("monthly_budgets")
+    .select("id, user_id, year, month, amount, created_at, updated_at")
+    .eq("user_id", userId)
+    .eq("year", year)
+    .eq("month", month)
+    .maybeSingle();
+
+  if (error) throw new Error(error.message);
+
+  return (data as MonthlyBudget | null) ?? null;
 }
